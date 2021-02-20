@@ -1,11 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { LinkToRoom } from './styles';
 
 export default function Home() {
+    const [roomId, setRoomId] = useState('');
+
     return (
         <div>
             <h1>Home</h1>
-            <Link to={`/room/${123}`}>Go to room</Link>
+            <input type="text" name="roomId" placeholder="Type room id" onChange={(e) => setRoomId(e.target.value) } />
+            <br />
+            <LinkToRoom to={`/room/${roomId}`} disabled={!roomId}>Go to room</LinkToRoom>
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// import ReactPlayer from 'react-player';
 import socket from '../../socket';
 
 export default function Room(props) {
@@ -6,6 +7,10 @@ export default function Room(props) {
 
     useEffect(() => {
         socket.emit('entered_room', props.match.params.id);
+
+        socket.on('new_user_room', userData => {
+            console.log(userData.id);
+        })
 
         socket.on('video_data', data => {
             setVideoUrl(data.url);
@@ -17,9 +22,19 @@ export default function Room(props) {
     });
 
     return (
-        <>
-            <h1>Room</h1>
-            <a href={videoUrl} hidden={!videoUrl}>Enter video</a>
-        </>
+        <div>
+            <div>
+                {/* <ReactPlayer url={videoUrl} /> */}
+            </div>
+            <div>
+                <ul>
+                    <li>Teste</li>
+                    <li>Teste</li>
+                    <li>Teste</li>
+                    <li>Teste</li>
+                    <li>Teste</li>
+                </ul>
+            </div>
+        </div>
     );
 }
